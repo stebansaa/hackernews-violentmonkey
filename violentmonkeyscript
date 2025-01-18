@@ -1,0 +1,167 @@
+// ==UserScript==
+// @name         Hacker News Readability Enhancer (Minimal)
+// @namespace    http://tampermonkey.net/
+// @version      2.4
+// @description  Subtle readability improvements while maintaining HN's design
+// @author       You
+// @match        https://news.ycombinator.com/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    const style = document.createElement('style');
+    style.innerHTML = `
+        /* Base styles */
+        body {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 18px;
+            line-height: 1.4;
+            color: #222;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Layout - Preserve HN style with subtle improvements */
+        #hnmain {
+            width: 90% !important;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 8px 0;
+        }
+
+        /* Story titles */
+        .storylink, .titleline a {
+            font-size: 19px;
+            color: #000;
+            text-decoration: none;
+            line-height: 1.4;
+        }
+
+        .titleline {
+            padding: 3px 0;
+        }
+
+        /* Subtle row separation */
+        tr.athing {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            background: rgba(255, 255, 255, 0.7);
+            padding: 8px 0;
+        }
+
+        tr.athing:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Metadata and points */
+        .subtext, .score, .hnuser {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.4;
+            padding: 3px 0;
+        }
+
+        .subtext a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .subtext a:hover {
+            text-decoration: underline;
+        }
+
+        /* Site domains */
+        .sitestr, .sitebit {
+            font-size: 15px;
+            color: #828282;
+            padding-left: 5px;
+        }
+
+        /* Navigation */
+        .pagetop {
+            font-size: 17px;
+            line-height: 1.4;
+            padding: 3px 0;
+            margin-bottom: 8px;
+        }
+
+        .pagetop a {
+            color: #000;
+            text-decoration: none;
+            margin-right: 12px;
+        }
+
+        /* Points and rank */
+        .rank {
+            font-size: 16px;
+            color: #828282;
+            padding: 0 5px;
+            min-width: 20px;
+            display: inline-block;
+            text-align: right;
+        }
+
+        .score {
+            color: #666;
+        }
+
+        /* Comment counts */
+        .subtext a[href^="item"] {
+            color: #666;
+        }
+
+        /* Spacing improvements */
+        td {
+            padding: 3px 0;
+        }
+
+        tr.spacer {
+            height: 5px !important;
+        }
+
+        /* More space for content */
+        td.title {
+            padding: 4px 0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                font-size: 17px;
+            }
+
+            #hnmain {
+                width: 96% !important;
+                padding: 8px;
+            }
+
+            .storylink, .titleline a {
+                font-size: 18px;
+            }
+
+            .subtext, .score, .hnuser {
+                font-size: 14px;
+            }
+        }
+
+        /* Subtle focus states */
+        a:focus {
+            outline: 1px solid rgba(255, 102, 0, 0.5);
+            outline-offset: 2px;
+        }
+
+        /* Time ago styling */
+        .age a {
+            color: #667;
+        }
+
+        /* Search box refinements */
+        input[type="text"] {
+            font-size: 16px;
+            padding: 2px 4px;
+            border: 1px solid #ccc;
+        }
+    `;
+
+    document.head.appendChild(style);
+})();
